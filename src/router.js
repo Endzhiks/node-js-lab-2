@@ -16,21 +16,19 @@ const baseDirectory = path.join(__dirname, '/routes');
 
 async function loadRoutesDirectories(directoryName, baseName) {
     const relativePath = path.join(baseName, directoryName);
-
     const workDirectory = path.join(baseDirectory, relativePath);
 
     const directory = await readdir(workDirectory, READ_DIR_OPTIONS);
 
     for (const node of directory) {
         if (node.isDirectory()) {
-            return loadRoutesDirectories(node.name, path.join(baseName, directoryName));
+            await loadRoutesDirectories(node.name, relativePath);
+        } else {
+            const modulePath = pathToFileURL(path.join(workDirectory, node.name));
+            const module = await import(modulePath);
 
-        }
-
-            let modulePath = pathToFileURL(path.join(workDirectory, node.name));
-            let module = await import(modulePath);
-        console.log("module: ", module)
             router.set(relativePath.replaceAll(path.sep, '/'), { ...module });
+        }
     }
 }
 
