@@ -1,0 +1,14 @@
+{
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs20.0",
+      "maxDuration": 10
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/src/:path*",
+      "destination": "https://node-js-lab-2-fmgzbv4a8-adnriis-projects.vercel.app/*"
+    }
+  ]
+}
