@@ -8,5 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Endziks",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "vercel": "^33.0.1"
+  }
 }
